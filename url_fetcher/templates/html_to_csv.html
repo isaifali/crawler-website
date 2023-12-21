@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+    body{
+        background-color: #f5f5f5;
+        margin-top: 8.5%;
+    }
+    button {
+    background-color: #0ea2bd;
+    padding: 13px 30px;
+    border-radius: 5PX;
+    border: none;
+    color: white;
+}
+</style>
+<body>
+    <section class="container text-center" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+        <h2 style="font-size: 28px;font-weight:700">HTML to CSV Converter</h2>
+        <p>Your HTML input should contain at least one TABLE tag. <br>All tables will be converted by default into 1 CSV file.</p>
+        
+        <form action="/html_to_csv" method="post" enctype="multipart/form-data">
+            <label for="html_content">Paste your HTML Code here :</label><br>
+            <textarea name="html_content" rows="10" cols="100"></textarea><br>
+            <button type="submit" value="Convert to CSV">Convert to CSV</button>
+        </form>
+    
+        </section>
+</body>    
+{% endblock %}

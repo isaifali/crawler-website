@@ -1,0 +1,160 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; */
+    margin-top: 8.5%;
+    margin-bottom: 0px;
+    background-color: #f5f5f5;
+}
+
+#drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#drop-area.highlight {
+    border-color: #007bff;
+}
+
+img {
+    max-width: 100%;
+    max-height: 200px;
+    margin-top: 20px;
+}
+.button{
+    background-color: #0ea2bd;
+    padding: 13px 30px;
+    border-radius: 5PX;
+    border: none;
+    color: white;
+}
+.newcontainer{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+</style>
+<!-- End Header -->
+<div class="newcontainer">
+    <div class="my-5 mx-5 text-center container" style="max-width: 1400px;margin-top: 200px;"> 
+        <h2 style="font-size: 28px;font-weight:700">Image to text Converter</h2>
+            <p>Turn picture into text with our free image to text converter. <br>Simply upload your photos in our online OCR and extract text from image with a single click.</p>
+        <div id="drop-area" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <p>Drag and drop an image file here, or click to select one.</p>
+            <input type="file" id="file-input" style="display: none;" onchange="handleFileInput(this)">
+            <form action="/image_to_text" method="post" enctype="multipart/form-data">
+                <label for="image">Upload Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+                <br>
+                <div style="padding:30px;margin-top:60px;">
+                <input class="button" type="submit" value="Convert to Text">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="text-center" style="text-align: center;" >
+      <div style="text-align: center;display:block;max-width: 100%;">
+          {% if extracted_text %}
+              <h2 style="text-align: center;font-size: 28px;font-weight:700">Extracted Text from Image:</h2><br>
+              <div style="padding:5px;">
+                <button style="padding: 5px 15px;font-size:14px;background-color:#0ea2bd" onclick="transformText('capitalize')">Capitalize</button>
+                <button style="padding: 5px 15px;font-size:14px;background-color:#0ea2bd" onclick="transformText('lowercase')">Lowercase</button>
+                <button style="padding: 5px 15px;font-size:14px;background-color:#0ea2bd" onclick="transformText('uppercase')">Uppercase</button>
+                <button style="padding: 5px 15px;font-size:14px;background-color:#0ea2bd" onclick="removeExtraSpaces()">Remove Extra Spaces</button>
+              </div>
+              <textarea id="extractedText" style="height: 200px;width: 900px;" readonly>{{ extracted_text }}</textarea><br>
+              <span id="wordCount" style="font-weight: normal; color: #888;">Word Count: <span id="wordCountValue"></span></span>
+              <span id="letterCount" style="font-weight: normal; color: #888;">Letter Count: <span id="letterCountValue"></span></span><br><br>
+              <button id="copyButton" class="button"  onclick="copyToClipboard()">Copy Above Text</button><br>
+            <br>
+          {% endif %}
+         
+        </div>
+      
+     </div>
+</div>
+   
+    <script>
+        // Check if the page is being loaded for the first time or refreshed
+        if (performance.navigation.type === 1) {
+            // Page is being loaded for the first time, clear the extracted text
+            document.getElementById('extractedText').innerText = '';
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            var extractedText = document.getElementById('extractedText').value;
+            var wordCount = countWords(extractedText);
+            var letterCount = countLetters(extractedText);
+
+            // Display counts
+            document.getElementById('wordCountValue').innerText = wordCount;
+            document.getElementById('letterCountValue').innerText = letterCount;
+        });
+
+        function countWords(text) {
+            var words = text.match(/\b\w+\b/g);
+            return words ? words.length : 0;
+        }
+
+        function countLetters(text) {
+            var letters = text.match(/[a-zA-Z]/g);
+            return letters ? letters.length : 0;
+        }
+        function copyToClipboard() {
+          var extractedText = document.getElementById('extractedText');
+          extractedText.select();
+          document.execCommand('copy');
+        }
+
+        function transformText(transformType) {
+    var extractedText = document.getElementById('extractedText');
+    var transformedText;
+
+    switch (transformType) {
+      case 'capitalize':
+        transformedText = extractedText.value.replace(/\b\w/g, function (match) {
+          return match.toUpperCase();
+        });
+        break;
+      case 'lowercase':
+        transformedText = extractedText.value.toLowerCase();
+        break;
+      case 'uppercase':
+        transformedText = extractedText.value.toUpperCase();
+        break;
+      default:
+        transformedText = extractedText.value;
+        break;
+    }
+
+    extractedText.value = transformedText;
+  }
+  function removeExtraSpaces() {
+            var extractedText = document.getElementById('extractedText');
+            var cleanedText = extractedText.value.replace(/\s+/g, ' ').trim();
+            extractedText.value = cleanedText;
+  }
+  function extractEmails() {
+            var extractedText = document.getElementById('extractedText').value;
+            var emails = extractedText.match(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g);
+
+            var emailsOutput = document.getElementById('emailsOutput');
+            if (emails && emails.length > 0) {
+                emailsOutput.innerText = 'Emails: ' + emails.join(', ');
+            } else {
+                emailsOutput.innerText = 'No emails found.';
+            }
+        }
+        
+    </script>
+
+
+{% endblock %}

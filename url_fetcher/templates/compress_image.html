@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+    body{
+        background-color: #f8f9fa;
+        margin-top: 8.5%;
+    }
+</style>
+<section class="container text-center" style="display: flex;flex-direction: column;justify-content: center;align-items: center;margin-top: 100px;">
+    <h2 style="font-size: 28px;font-weight:700">Image Compression</h2>
+    <div style="border: 2px dashed #ccc;border-radius: 8px;padding: 20px;text-align: center;cursor: pointer;align-items: center;text-align: center;">
+        <p>
+            Compress JPG, PNG with the best quality and compression.<br>
+Reduce the filesize of your images at once.
+        </p>
+        <form action="/upload_and_compress" method="post" enctype="multipart/form-data">
+            <input type="file" name="images" accept="image/*" multiple required><br><br><br>
+            <label for="quality">Compression Quality (%):</label>
+            <input type="range" name="quality" id="qualityRange" min="1" max="100" value="85" oninput="updateQualityValue(this.value)" required>
+            <span id="qualityValue">85</span><br><br>
+            <button type="submit" value="Compress and Download">Compress and Download</button>
+        </form>
+        {% if current_size %}
+        <p>Current Size: {{ current_size }}</p>
+        {% endif %}
+        <div id="fileSizeInfo"></div>
+    </div>
+</section>    
+       
+       
+<script>
+    function updateQualityValue(value) {
+        document.getElementById("qualityValue").textContent = value;
+    }
+    function updateFileSize() {
+            // Get the selected files
+            var input = document.getElementById('images');
+            var files = input.files;
+
+            // Calculate total size
+            var totalSize = 0;
+            for (var i = 0; i < files.length; i++) {
+                totalSize += files[i].size;
+            }
+
+            // Display total size information
+            var fileSizeInfo = document.getElementById('fileSizeInfo');
+            fileSizeInfo.innerHTML = 'Total File Size: ' + formatBytes(totalSize);
+        }
+
+        // Function to format bytes into readable format
+        function formatBytes(bytes, decimals = 2) {
+            if (bytes === 0) return '0 Bytes';
+
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        }
+</script>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broken Link Checker</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+<h1>Broken Link Checker</h1>
+
+<form id="urlForm">
+    <label for="url">Enter URL:</label>
+    <input type="text" name="url" id="url" required>
+    <button type="submit">Fetch URLs</button>
+</form>
+
+<h2>Unique URLs:</h2>
+<ul id="uniqueUrls"></ul>
+
+<h2>Broken Links:</h2>
+<ul id="brokenLinks"></ul>
+
+<script>
+    $(document).ready(function () {
+        $('#urlForm').submit(function (e) {
+            e.preventDefault();
+
+            // Clear previous results
+            $('#uniqueUrls').empty();
+            $('#brokenLinks').empty();
+
+            // Fetch URLs and broken links
+            var url = $('#url').val();
+            $.post('/check_broken_links', {url: url}, function (data) {
+                var uniqueUrls = data.urls;
+                var brokenLinks = data.broken_links;
+
+                // Display unique URLs
+                $.each(uniqueUrls, function (i, url) {
+                    $('#uniqueUrls').append('<li>' + url + '</li>');
+                });
+
+                // Display broken links
+                $.each(brokenLinks, function (i, link) {
+                    $('#brokenLinks').append('<li>' + link + '</li>');
+                });
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

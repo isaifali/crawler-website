@@ -1,0 +1,276 @@
+{% extends "layout.html" %}
+{% block content %}
+
+ <section id="hero-static" class="hero-static d-flex align-items-center">
+    <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative" data-aos="zoom-out">
+      <h2>Welcome to <span style="font-weight:700">Surf Nebula</span></h2>
+      <p>Navigating the Cosmic Web: Surf Nebula, Your Gateway to Limitless Discoveries.</p>
+      <div class="d-flex">
+       <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>     
+      </div>
+      <div class="my-3"> 
+        <span>To use Surf Nebula <strong>URL / Links Extractor</strong>, Paste Url in the input box given below and click on Fetch URLs Button.</span>
+        <span>
+          Our Tool is specially design to get the links of pages which are associated with your website, it doesn't include any kind of media file
+        </span>
+      </div>
+      <div class="container my-4">
+        <form method="POST" action="/">
+            <label for="url" class="url"><strong>Enter URL:</strong></label>
+            <input type="text" id="url" value="enter url here" onclick="clearDefaultText()" name="url" required>
+            <button type="submit" onclick="fetchUrls(); return false;">Fetch URLs</button>
+        </form>
+        <!-- Loading indicator -->
+        <div id="loading-indicator" style="display: none;padding:40px;">
+            <p style="font-weight: 700;">Note: If the Website contains more than 100 urls it will take time, we request you to wait for a minute</p>
+            <p> <img src="/static/img/loader.gif" width="40px" style="margin-top:0px !important;" alt=""> Your URLs are fetching. Please wait...</p>
+        </div>
+        <!-- Display URLs in a table -->
+       <div style="display: flex;justify-content: center;padding: 30px;width: 100%;">
+        <table id="url-table" style="display: none;width: 100%;">
+          <thead>
+            <tr >
+              <th colspan="2" align="center"> 
+                 <h3 style="text-align: center;font-weight: 700;">
+                     Result
+                 </h3>
+              </th>
+            </tr>
+          </thead>
+          <thead>
+              <tr width="100%">
+                  <th style="background-color: #0ea2bd;">No.</th>
+                  <th style="background-color: #0ea2bd;">URL</th>
+              </tr>
+          </thead>
+          
+          <tbody id="url-table-body"></tbody>
+      </table>
+       </div>
+    </div>
+  <main id="main">
+    <!-- ======= Featured Services Section ======= -->
+    <section id="featured-services" class="featured-services">
+      <div class="container">
+        <div class="row gy-4">
+            <h2>Our Services</h2>
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="zoom-out">
+            <div class="service-item position-relative">
+              <!-- <div class="icon"><i class="bi bi-activity icon"></i></div> -->
+              <div class="icon">
+                <img src="/static/img/text-con.svg" width="36" alt="">
+              </div>
+              <h4><a href="/image_to_text" class="stretched-link">Image To Text</a></h4>
+              <p>Utilize advanced OCR technology to transform image content into machine-readable text.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="zoom-out" data-aos-delay="200">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <img src="/static/img/pdf-doc.svg" width="36" alt="">
+              </div>
+              <h4><a href="/pdf-to-doc" class="stretched-link">PDF to Doc</a></h4>
+              <p>Seamlessly convert PDF files into editable Word documents for easy editing and collaboration.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="zoom-out" data-aos-delay="400">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <img src="/static/img/html-csv.svg" width="36" alt="">
+              </div>
+              <h4><a href="/html_to_csv" class="stretched-link">HTML to CSV</a></h4>
+              <p>Quickly convert HTML tables into CSV format for data processing and analysis.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="zoom-out" data-aos-delay="600">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <img src="/static/img/compress.svg" width="36" alt="">
+              </div>
+              <h4><a href="/compress_image" class="stretched-link">Compress Images</a></h4>
+              <p>Reduce image file sizes for faster web loading and efficient storage without compromising quality.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+    </section><!-- End Featured Services Section -->
+
+
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients">
+      <div class="container" data-aos="zoom-out">
+
+        <div class="clients-slider swiper">
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><img src="static/img/clients/client-1.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="static/img/clients/client-2.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="static/img/clients/client-3.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="static/img/clients/client-4.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="static/img/clients/client-5.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="static/img/clients/client-6.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="static/img/clients/client-7.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="static/img/clients/client-8.png" class="img-fluid" alt=""></div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Clients Section -->
+
+    <!-- ======= On Focus Section ======= -->
+  
+    <!-- ======= Features Section ======= -->
+  <!-- End Features Section -->
+
+    
+
+    <!-- ======= F.A.Q Section ======= -->
+    <!-- <section id="faq" class="faq">
+      <div class="container-fluid" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
+
+            <div class="content px-xl-5">
+              <h3>Frequently Asked <strong>Questions</strong></h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+              </p>
+            </div>
+
+            <div class="accordion accordion-flush px-xl-5" id="faqlist">
+
+              <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                    <i class="bi bi-question-circle question-icon"></i>
+                     How does this URL extractor work?
+                  </button>
+                </h3>
+                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Working with this tool is very simple. First, it gets the source of the webpage that you enter and then extracts URLs from the text. Using this tool you will get the following results
+
+                    <ul>
+                    <li>
+                        Total number of the links on the web page
+                    </li>
+                    <li>
+                        Anchor text of each link.
+                    </li>
+                    <li>
+                        Do-follow and No-Follow Status of each anchor text.
+                    </li>   
+                    <li>
+                        Link Type internal or external
+                    </li>
+                    You can also filter and get a list of internal or external links only.
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+                    <i class="bi bi-question-circle question-icon"></i>
+                    Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?
+                  </button>
+                </h3>
+                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item" data-aos="fade-up" data-aos-delay="400">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
+                    <i class="bi bi-question-circle question-icon"></i>
+                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?
+                  </button>
+                </h3>
+                <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item" data-aos="fade-up" data-aos-delay="500">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-4">
+                    <i class="bi bi-question-circle question-icon"></i>
+                    Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
+                  </button>
+                </h3>
+                <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    <i class="bi bi-question-circle question-icon"></i>
+                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item" data-aos="fade-up" data-aos-delay="600">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-5">
+                    <i class="bi bi-question-circle question-icon"></i>
+                    Tempus quam pellentesque nec nam aliquam sem et tortor consequat?
+                  </button>
+                </h3>
+                <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url(" static/img/faq.jpg");'>&nbsp;</div>
+        </div>
+
+      </div>
+    </section> -->
+    
+    <!-- End F.A.Q Section -->
+
+  
+
+    <!-- ======= Contact Section ======= -->
+   <!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/vendor/aos/aos.js"></script>
+  <script src="/static/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/static/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/static/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/static/js/main.js"></script>
+  
+</body>
+
+</html>
+
+{% endblock %}

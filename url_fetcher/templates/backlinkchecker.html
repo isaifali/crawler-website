@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container py-5" style="margin: 100px;">
+    <h1>Backlink Checker</h1>
+    <form action="/backlink" method="post">
+        <label for="url">Enter the URL to check backlinks:</label>
+        <input type="text" name="url" id="url" required>
+        <button type="submit">Check Backlinks</button>
+    </form>
+
+    {% if user_url %}
+        <h2>Backlinks for {{ user_url }}:</h2>
+        <ul>
+            {% for link in backlinks %}
+                <li>{{ link }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+
+{% endblock %}

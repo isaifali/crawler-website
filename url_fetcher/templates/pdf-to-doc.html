@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+ form {
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: normal;
+
+}
+body{
+   background-color: #f5f5f5;
+   margin-top: 8.5%;
+}
+</style>
+<section class="container " style="display: flex;flex-direction: column;justify-content: center;align-items: center;margin-top: 100px;">
+    <h2 style="font-size: 28px;font-weight:700">PDF to Word Converter</h2>
+    <p align="center">we do not save any of your document, <br>it is automatically deleted from our database</p>
+<div style="border: 2px dashed #ccc;border-radius: 8px;padding: 20px;text-align: center;cursor: pointer;align-items: center;text-align: center;">
+    
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form action="/convert" method="post" enctype="multipart/form-data">
+        <label for="file">Choose a PDF file: </label>
+        <input type="file" id="file" name="file" accept=".pdf" required>
+        <br><br><br><br>
+        <button type="submit">Convert</button>
+    </form>
+
+</div>
+</section>
+
+{% endblock %}
