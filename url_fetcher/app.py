@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, make_response
 from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
 from pdf2docx import Converter
@@ -11,6 +11,7 @@ import time
 import threading
 import pandas as pd 
 import zipfile
+
 
 app = Flask(__name__)
 
@@ -343,4 +344,4 @@ def convert_jpg_to_png():
     return render_template('jpg_to_png.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False, host='0.0.0.0' )

@@ -1,0 +1,29 @@
+<!-- templates/base64.html -->
+{% extends "layout.html" %}
+{% block content %}
+<style>
+    body{
+        background-color: #f8f9fa;
+        margin-top: 8.5%;
+    }
+    label{display: block;}
+</style>
+<div class="container" style="display: flex;flex-direction: column;justify-content: center;align-items: center;margin-top: 200px;">
+    <h2 style="font-size: 28px;font-weight:700">Base64 PDF Decoder final</h2>
+    <div class="row" style="border: 2px dashed #ccc;border-radius: 8px;padding: 20px;text-align: center;cursor: pointer;align-items: center;text-align: center;">
+
+        <form action="/decode" method="post" enctype="multipart/form-data">
+            <label for="file">Choose a file:</label>
+            <input type="file" name="file" accept="image/*">
+            <br>
+            <input type="submit" value="Upload and Decode">
+        </form>
+        <hr>
+        <h2>Results:</h2>
+        <div id="results"></div>
+    </div>
+   
+</div>
+    
+
+{% endblock %}
