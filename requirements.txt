@@ -1,4 +1,6 @@
-﻿anyio==3.6.2
+python==3.10.9
+other_dependency==1.0.0
+anyio==3.6.2
 async-generator==1.10
 attrs==22.2.0
 Automat==22.10.0
